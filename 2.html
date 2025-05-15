@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_54fb0a3bd20bfd65a07ddf9024acc9a1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+<style>
+.leaflet-control-layers {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+    font-size: 11px !important;
+    background: rgba(255,255,255,0.95) !important;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+    padding-bottom: 6px;
+}
+.leaflet-control-layers label {
+    white-space: nowrap;
+    padding-left: 4px;
+}
+.leaflet-control-layers input[type="checkbox"] {
+    transform: scale(0.95);
+    margin-right: 3px;
+}
+.layer-toggle-buttons {
+    padding: 5px 4px;
+    text-align: center;
+}
+.layer-toggle-buttons button {
+    font-size: 11px;
+    margin: 2px 1px;
+    padding: 2px 6px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    cursor: pointer;
+}
+.layer-toggle-buttons button:hover {
+    background-color: #e0e0e0;
+}
+</style>
+    
+<style>
+#toggle-controller-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    background-color: #f3f3f3;
+    border: 1px solid #aaa;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+#toggle-controller-btn:hover {
+    background-color: #e0e0e0;
+}
+.leaflet-control-layers {
+    margin-top: 45px !important;  /* 防止与按钮重叠 */
+}
+</style>
+<script>
+setTimeout(() => {
+    const layerControl = document.querySelector('.leaflet-control-layers');
+    if (layerControl) {
+        const btn = document.createElement('div');
+        btn.id = 'toggle-controller-btn';
+        btn.innerHTML = '隐藏';
+        btn.onclick = () => {
+            if (layerControl.style.display === 'none') {
+                layerControl.style.display = 'block';
+                btn.innerHTML = '隐藏';
+            } else {
+                layerControl.style.display = 'none';
+                btn.innerHTML = '控制';
+            }
+        };
+        document.body.appendChild(btn);
+    }
+}, 800);
+</script>
+    
+<style>
+.leaflet-control-attribution {
+    display: none !important;
+}
+</style>
+    
+            <div class="folium-map" id="map_54fb0a3bd20bfd65a07ddf9024acc9a1" ></div>
+        
+    
+<div style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    overflow-y: auto;
+    z-index:9999;
+    background-color: white;
+    border-right:2px solid grey;
+    padding: 25px;
+    font-size:17px;
+    line-height:2em;
+    box-shadow: 4px 0 8px rgba(0,0,0,0.2);
+">
+<b style="font-size:20px;">行程安排</b><br><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:red;"></span>
+<b>Day 1（5月18日）｜悉尼 → 新加坡</b><br>
+✈【TR003】12:50–19:15 悉尼 → 新加坡樟宜机场<br>
+🏨 入住：新加坡柏薇樟宜酒店（Parc Sovereign Hotel Changi）<br>
+🌃 晚间：星耀樟宜或滨海湾夜游</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:orange;"></span>
+<b>Day 2（5月19日）｜新加坡 → 巴厘岛 → 泗水</b><br>
+✈【TR286】15:55–18:40 新加坡 → 巴厘岛（DPS）<br>
+✈【QG9665】21:55（巴厘岛时间）→ 22:00（泗水时间）<br>
+🏨 入住：泗水奈尔顿逸林酒店（DoubleTree by Hilton Surabaya）</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:blue;"></span>
+<b>Day 3（5月20日）｜泗水 → 瀑布 → Bromo</b><br>
+🌇 上午：泗水市区自由安排、酒店休息或轻松散步<br>
+🚗 下午：办理退房 前往马达将军瀑布（约2.5小时）<br> 
+📸 漫步观景台欣赏瀑布景色<br>
+🚗 傍晚继续前往 Bromo（约1小时）<br>
+🏨 入住：ARTOTEL 小屋布罗莫酒店（ARTOTEL Cabin Bromo）</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:green;"></span>
+<b>Day 4（5月21日）｜Bromo → 泗水 → 巴厘岛</b><br>
+🌄 凌晨登山看日出（或上午造访）<br>
+✈【IU708】18:15–20:15 泗水 → 巴厘岛（DPS）<br>
+🏨 入住：Munno Villa</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:purple;"></span>
+<b>Day 5（5月22日）｜佩尼达岛一日游</b><br>
+🚤 06:30 出发 → Sanur码头搭快艇<br>
+📸 游览：精灵坠崖、Broken Beach、Angel's Billabong、Crystal Bay<br>
+🏨 返回 Munno Villa</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:darkred;"></span>
+<b>Day 6（5月23日）｜巴厘岛海边</b><br>
+☀ 全天放松：海滩、SPA、泳池<br>
+🍽 推荐：金巴兰海滩日落海鲜晚餐<br>
+🏨 Munno Villa</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:darkblue;"></span>
+<b>Day 7（5月24日）｜海边 → 乌布</b><br>
+🛵 上午：ATV越野体验<br>
+🚗 下午前往乌布（约1.5小时）<br>
+🏨 入住：萨克蒂花园度假村（SPA & 放松）</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:cadetblue;"></span>
+<b>Day 8（5月25日）｜乌布探索</b><br>
+🌾 上午：德格拉朗梯田 + 网红秋千<br>
+🛕 下午：圣泉寺<br>
+🏨 入住：普拉玛纳吉里库萨玛酒店</div><br>
+
+<div><span style="display:inline-block;width:20px;height:20px;background-color:black;"></span>
+<b>Day 9（5月26日）｜乌布 → DPS机场</b><br>
+🌳 上午森林步道 / 早餐放松<br>
+🧳 12:00 退房，前往 DPS 机场（约1.5小时）</div><br>
+
+</div>
+    
+<script>
+setTimeout(() => {
+    const layerBox = document.querySelector('.leaflet-control-layers-overlays');
+    if (layerBox) {
+        const container = document.createElement('div');
+        container.className = 'layer-toggle-buttons';
+
+        const showBtn = document.createElement('button');
+        showBtn.innerText = '全部显示';
+        showBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (!cb.checked) cb.click();
+            });
+        };
+
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = '全部隐藏';
+        hideBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (cb.checked) cb.click();
+            });
+        };
+
+        container.appendChild(showBtn);
+        container.appendChild(hideBtn);
+        layerBox.parentNode.insertBefore(container, layerBox);
+    }
+}, 800);
+</script>
+    
+<style>
+.layer-toggle-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 4px 4px 2px 4px;
+}
+.layer-toggle-buttons button {
+    font-size: 10px;
+    padding: 2px 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: #f3f3f3;
+    cursor: pointer;
+    width: 50px;
+}
+.layer-toggle-buttons button:hover {
+    background-color: #e0e0e0;
+}
+</style>
+<script>
+setTimeout(() => {
+    const layerBox = document.querySelector('.leaflet-control-layers-overlays');
+    if (layerBox) {
+        const container = document.createElement('div');
+        container.className = 'layer-toggle-buttons';
+
+        const showBtn = document.createElement('button');
+        showBtn.innerText = '全选';
+        showBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (!cb.checked) cb.click();
+            });
+        };
+
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = '全不选';
+        hideBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (cb.checked) cb.click();
+            });
+        };
+
+        container.appendChild(showBtn);
+        container.appendChild(hideBtn);
+        layerBox.parentNode.insertBefore(container, layerBox);
+    }
+}, 800);
+</script>
+    
+<script>
+setTimeout(() => {
+    const oldContainer = document.querySelectorAll('.layer-toggle-buttons');
+    oldContainer.forEach(el => el.remove());  // 移除旧按钮容器
+
+    const layerBox = document.querySelector('.leaflet-control-layers-overlays');
+    if (layerBox) {
+        const container = document.createElement('div');
+        container.className = 'layer-toggle-buttons';
+
+        const showBtn = document.createElement('button');
+        showBtn.innerText = '全选';
+        showBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (!cb.checked) cb.click();
+            });
+        };
+
+        const hideBtn = document.createElement('button');
+        hideBtn.innerText = '全不选';
+        hideBtn.onclick = () => {
+            layerBox.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (cb.checked) cb.click();
+            });
+        };
+
+        container.appendChild(showBtn);
+        container.appendChild(hideBtn);
+        layerBox.parentNode.insertBefore(container, layerBox);
+    }
+}, 800);
+</script>
+</body>
+<script>
+    
+    
+            var map_54fb0a3bd20bfd65a07ddf9024acc9a1 = L.map(
+                "map_54fb0a3bd20bfd65a07ddf9024acc9a1",
+                {
+                    center: [-8.3, 115.1],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_65f5c8e782ebce67e77cfd76170daab3 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var tile_layer_8c208e27add8b3cb8829d2326a7f40cd = L.tileLayer(
+                "https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {"attribution": "Tiles \u00a9 Esri", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var feature_group_b152407aec05c1e08979142d8068fe70 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_00786f27bafa199a62eda109c4b833d5 = L.marker(
+                [-33.9399, 151.1753],
+                {}
+            ).addTo(feature_group_b152407aec05c1e08979142d8068fe70);
+        
+    
+            var icon_4dedd0c79334466390840129fc958101 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_00786f27bafa199a62eda109c4b833d5.setIcon(icon_4dedd0c79334466390840129fc958101);
+        
+    
+        var popup_2d2326ce36e5d3f5741c673c4ce4cab1 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_c371d9cef6cb98c693c9217eff9e12d9 = $(`<div id="html_c371d9cef6cb98c693c9217eff9e12d9" style="width: 100.0%; height: 100.0%;"><b>悉尼机场（SYD）</b></div>`)[0];
+            popup_2d2326ce36e5d3f5741c673c4ce4cab1.setContent(html_c371d9cef6cb98c693c9217eff9e12d9);
+        
+
+        marker_00786f27bafa199a62eda109c4b833d5.bindPopup(popup_2d2326ce36e5d3f5741c673c4ce4cab1)
+        .openPopup();
+
+        
+    
+    
+            var marker_1e51b61e80fcf429792a03c45059be7f = L.marker(
+                [1.3644, 103.9915],
+                {}
+            ).addTo(feature_group_b152407aec05c1e08979142d8068fe70);
+        
+    
+            var icon_f64b755de53d01f9f50f9bb4f15328b5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_1e51b61e80fcf429792a03c45059be7f.setIcon(icon_f64b755de53d01f9f50f9bb4f15328b5);
+        
+    
+        var popup_1e3be3444783d06b49d96aa7435ff854 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_54caf021e2621f63bc05a682f18f1ff2 = $(`<div id="html_54caf021e2621f63bc05a682f18f1ff2" style="width: 100.0%; height: 100.0%;"><b>新加坡樟宜机场（SIN）</b></div>`)[0];
+            popup_1e3be3444783d06b49d96aa7435ff854.setContent(html_54caf021e2621f63bc05a682f18f1ff2);
+        
+
+        marker_1e51b61e80fcf429792a03c45059be7f.bindPopup(popup_1e3be3444783d06b49d96aa7435ff854)
+        .openPopup();
+
+        
+    
+    
+            var marker_11f799c0b09d547a6ffa27a381640fe4 = L.marker(
+                [1.3637, 103.9652],
+                {}
+            ).addTo(feature_group_b152407aec05c1e08979142d8068fe70);
+        
+    
+            var icon_866f1e62b667c96ce0d1b76372150f24 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_11f799c0b09d547a6ffa27a381640fe4.setIcon(icon_866f1e62b667c96ce0d1b76372150f24);
+        
+    
+        var popup_1eddd1068359569915b7ad796209479a = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_61f64d2133ad43ad001b022bba5d69dc = $(`<div id="html_61f64d2133ad43ad001b022bba5d69dc" style="width: 100.0%; height: 100.0%;"><b>新加坡柏薇樟宜酒店</b></div>`)[0];
+            popup_1eddd1068359569915b7ad796209479a.setContent(html_61f64d2133ad43ad001b022bba5d69dc);
+        
+
+        marker_11f799c0b09d547a6ffa27a381640fe4.bindPopup(popup_1eddd1068359569915b7ad796209479a)
+        .openPopup();
+
+        
+    
+    
+            ant_path_9b528178392daa2ce851485ca4d3dd07 = L.polyline.antPath(
+              [[-33.9399, 151.1753], [1.3644, 103.9915], [1.3637, 103.9652]],
+              {"bubblingMouseEvents": true, "color": "red", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_b152407aec05c1e08979142d8068fe70);
+        
+    
+            var feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_c8981fee02c778a801152caa9b0db431 = L.marker(
+                [1.3637, 103.9652],
+                {}
+            ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var icon_8cf0812745e986c9c74f1d7732875055 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_c8981fee02c778a801152caa9b0db431.setIcon(icon_8cf0812745e986c9c74f1d7732875055);
+        
+    
+        var popup_514144d96140cbaf3c096b510433101d = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_3f80fcb8cd20476cc728061f3519e650 = $(`<div id="html_3f80fcb8cd20476cc728061f3519e650" style="width: 100.0%; height: 100.0%;"><b>新加坡柏薇樟宜酒店</b></div>`)[0];
+            popup_514144d96140cbaf3c096b510433101d.setContent(html_3f80fcb8cd20476cc728061f3519e650);
+        
+
+        marker_c8981fee02c778a801152caa9b0db431.bindPopup(popup_514144d96140cbaf3c096b510433101d)
+        .openPopup();
+
+        
+    
+    
+            var marker_85307c4d668fb7225c50027d862de032 = L.marker(
+                [1.3644, 103.9915],
+                {}
+            ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var icon_6d65c8e6fdc72cd1bff941ded155c8f1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_85307c4d668fb7225c50027d862de032.setIcon(icon_6d65c8e6fdc72cd1bff941ded155c8f1);
+        
+    
+        var popup_fb59aea2ee62a4d62d3ccb75cd529cf8 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_9080802d56dbe5007f2a249483dd24d0 = $(`<div id="html_9080802d56dbe5007f2a249483dd24d0" style="width: 100.0%; height: 100.0%;"><b>新加坡樟宜机场（SIN）</b></div>`)[0];
+            popup_fb59aea2ee62a4d62d3ccb75cd529cf8.setContent(html_9080802d56dbe5007f2a249483dd24d0);
+        
+
+        marker_85307c4d668fb7225c50027d862de032.bindPopup(popup_fb59aea2ee62a4d62d3ccb75cd529cf8)
+        .openPopup();
+
+        
+    
+    
+            var marker_d3aaad2b40382bf98773fbbabaf50658 = L.marker(
+                [-8.7481, 115.1668],
+                {}
+            ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var icon_85bb5292b925ee344a06584450f524f7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_d3aaad2b40382bf98773fbbabaf50658.setIcon(icon_85bb5292b925ee344a06584450f524f7);
+        
+    
+        var popup_331e7c6ebbc4305059bd8693417712c7 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_0c415a2aacf3daf63ba7de4aaba443c6 = $(`<div id="html_0c415a2aacf3daf63ba7de4aaba443c6" style="width: 100.0%; height: 100.0%;"><b>巴厘岛登巴萨机场（DPS）</b></div>`)[0];
+            popup_331e7c6ebbc4305059bd8693417712c7.setContent(html_0c415a2aacf3daf63ba7de4aaba443c6);
+        
+
+        marker_d3aaad2b40382bf98773fbbabaf50658.bindPopup(popup_331e7c6ebbc4305059bd8693417712c7)
+        .openPopup();
+
+        
+    
+    
+            var marker_ea1ece498c6a866a7bc7e7ebaca749c2 = L.marker(
+                [-7.3798, 112.8],
+                {}
+            ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var icon_e1923a17de10b952b43a7bef6ee4dcef = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_ea1ece498c6a866a7bc7e7ebaca749c2.setIcon(icon_e1923a17de10b952b43a7bef6ee4dcef);
+        
+    
+        var popup_94e9b074b0fb1c0b9e304269986ec716 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_e9784d74c4b81fba0d56c37eb796817d = $(`<div id="html_e9784d74c4b81fba0d56c37eb796817d" style="width: 100.0%; height: 100.0%;"><b>泗水朱安达机场（SUB）</b></div>`)[0];
+            popup_94e9b074b0fb1c0b9e304269986ec716.setContent(html_e9784d74c4b81fba0d56c37eb796817d);
+        
+
+        marker_ea1ece498c6a866a7bc7e7ebaca749c2.bindPopup(popup_94e9b074b0fb1c0b9e304269986ec716)
+        .openPopup();
+
+        
+    
+    
+            var marker_4f660eeb390ce957e498e3860c791e63 = L.marker(
+                [-7.2725, 112.7455],
+                {}
+            ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var icon_d56b1e46fe6f863e79ae802c0cffd8e8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_4f660eeb390ce957e498e3860c791e63.setIcon(icon_d56b1e46fe6f863e79ae802c0cffd8e8);
+        
+    
+        var popup_69e6976900708323fa46839fb5f50bac = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_cedbaa1d23ff23c58fd5f4e8940e458d = $(`<div id="html_cedbaa1d23ff23c58fd5f4e8940e458d" style="width: 100.0%; height: 100.0%;"><b>泗水希尔顿逸林酒店</b></div>`)[0];
+            popup_69e6976900708323fa46839fb5f50bac.setContent(html_cedbaa1d23ff23c58fd5f4e8940e458d);
+        
+
+        marker_4f660eeb390ce957e498e3860c791e63.bindPopup(popup_69e6976900708323fa46839fb5f50bac)
+        .openPopup();
+
+        
+    
+    
+            ant_path_d4ca3eade6a13dd4425fd37b091cecc2 = L.polyline.antPath(
+              [[1.3637, 103.9652], [1.3644, 103.9915], [-8.7481, 115.1668], [-7.3798, 112.8], [-7.2725, 112.7455]],
+              {"bubblingMouseEvents": true, "color": "orange", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda);
+        
+    
+            var feature_group_9416fbe133ca8e972a82e3bfb352f244 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_0750e041b5da442c805ae5acfaffe6ff = L.marker(
+                [-7.2725, 112.7455],
+                {}
+            ).addTo(feature_group_9416fbe133ca8e972a82e3bfb352f244);
+        
+    
+            var icon_172e8f7785822f905f12f31c784482fb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0750e041b5da442c805ae5acfaffe6ff.setIcon(icon_172e8f7785822f905f12f31c784482fb);
+        
+    
+        var popup_21c3a3df5636b177d1e2fbdd566c5df0 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_de58fdb1ba7fba46e135ff862470c646 = $(`<div id="html_de58fdb1ba7fba46e135ff862470c646" style="width: 100.0%; height: 100.0%;"><b>泗水希尔顿逸林酒店</b></div>`)[0];
+            popup_21c3a3df5636b177d1e2fbdd566c5df0.setContent(html_de58fdb1ba7fba46e135ff862470c646);
+        
+
+        marker_0750e041b5da442c805ae5acfaffe6ff.bindPopup(popup_21c3a3df5636b177d1e2fbdd566c5df0)
+        .openPopup();
+
+        
+    
+    
+            var marker_0465e73918905dc9c61eb42d6a4bd499 = L.marker(
+                [-7.8285, 113.0589],
+                {}
+            ).addTo(feature_group_9416fbe133ca8e972a82e3bfb352f244);
+        
+    
+            var icon_02bc20c9995ca0a5d4fdd1f6cdcabd74 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0465e73918905dc9c61eb42d6a4bd499.setIcon(icon_02bc20c9995ca0a5d4fdd1f6cdcabd74);
+        
+    
+        var popup_e3971f88bc6d72955a39affd41f5cf2c = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_2be5322776a7ef452d2c74a48c994121 = $(`<div id="html_2be5322776a7ef452d2c74a48c994121" style="width: 100.0%; height: 100.0%;"><b>Day 3 - 马达将军瀑布</b></div>`)[0];
+            popup_e3971f88bc6d72955a39affd41f5cf2c.setContent(html_2be5322776a7ef452d2c74a48c994121);
+        
+
+        marker_0465e73918905dc9c61eb42d6a4bd499.bindPopup(popup_e3971f88bc6d72955a39affd41f5cf2c)
+        .openPopup();
+
+        
+    
+    
+            var marker_d7ddaf6df13e1091756171227f4c24ab = L.marker(
+                [-7.9274, 112.9692],
+                {}
+            ).addTo(feature_group_9416fbe133ca8e972a82e3bfb352f244);
+        
+    
+            var icon_208795ed74356dcdf15d9823c2209edb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d7ddaf6df13e1091756171227f4c24ab.setIcon(icon_208795ed74356dcdf15d9823c2209edb);
+        
+    
+        var popup_8e867c4d749d286bfd88019698e1c7ef = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_f15e145ad946cc9057dd62a2c5644ef1 = $(`<div id="html_f15e145ad946cc9057dd62a2c5644ef1" style="width: 100.0%; height: 100.0%;"><b>ARTOTEL Cabin Bromo</b></div>`)[0];
+            popup_8e867c4d749d286bfd88019698e1c7ef.setContent(html_f15e145ad946cc9057dd62a2c5644ef1);
+        
+
+        marker_d7ddaf6df13e1091756171227f4c24ab.bindPopup(popup_8e867c4d749d286bfd88019698e1c7ef)
+        .openPopup();
+
+        
+    
+    
+            ant_path_3ff1ab525f0e21eb76546a0c477eb68e = L.polyline.antPath(
+              [[-7.2725, 112.7455], [-7.8285, 113.0589], [-7.9274, 112.9692]],
+              {"bubblingMouseEvents": true, "color": "blue", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_9416fbe133ca8e972a82e3bfb352f244);
+        
+    
+            var feature_group_53ab8dd0e5d349b73fe1e53b30bd5599 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_022fa14688f460e4c4afea37bd10020c = L.marker(
+                [-7.9274, 112.9692],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_93e3877c395982763787126161809e56 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_022fa14688f460e4c4afea37bd10020c.setIcon(icon_93e3877c395982763787126161809e56);
+        
+    
+        var popup_17ede66aeac5476787435ba515c05461 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_3712e714102a83349d4335f0dd31be4e = $(`<div id="html_3712e714102a83349d4335f0dd31be4e" style="width: 100.0%; height: 100.0%;"><b>ARTOTEL Cabin Bromo</b></div>`)[0];
+            popup_17ede66aeac5476787435ba515c05461.setContent(html_3712e714102a83349d4335f0dd31be4e);
+        
+
+        marker_022fa14688f460e4c4afea37bd10020c.bindPopup(popup_17ede66aeac5476787435ba515c05461)
+        .openPopup();
+
+        
+    
+    
+            var marker_3ab2d61167f4470a134f76102f080a1c = L.marker(
+                [-7.9425, 112.953],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_b4edfa779f95cd50ea1b47135bbab86c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_3ab2d61167f4470a134f76102f080a1c.setIcon(icon_b4edfa779f95cd50ea1b47135bbab86c);
+        
+    
+        var popup_d875d3ef58ccac76f514e5c84af329e1 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_caf7c5f8ba685fba231f09b7318e00fb = $(`<div id="html_caf7c5f8ba685fba231f09b7318e00fb" style="width: 100.0%; height: 100.0%;"><b>Day 4 - Bromo火山景点</b></div>`)[0];
+            popup_d875d3ef58ccac76f514e5c84af329e1.setContent(html_caf7c5f8ba685fba231f09b7318e00fb);
+        
+
+        marker_3ab2d61167f4470a134f76102f080a1c.bindPopup(popup_d875d3ef58ccac76f514e5c84af329e1)
+        .openPopup();
+
+        
+    
+    
+            var marker_b63fb8782f744af8c1c9813c4d9c9e67 = L.marker(
+                [-7.9274, 112.9692],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_b7aa34a8bd7bf7f50e3918bc01ae7d0d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_b63fb8782f744af8c1c9813c4d9c9e67.setIcon(icon_b7aa34a8bd7bf7f50e3918bc01ae7d0d);
+        
+    
+        var popup_36ad0734336b9809ec3d78a626fa6ca7 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_3e35543ec0abddaa614eb905b22069b8 = $(`<div id="html_3e35543ec0abddaa614eb905b22069b8" style="width: 100.0%; height: 100.0%;"><b>ARTOTEL Cabin Bromo</b></div>`)[0];
+            popup_36ad0734336b9809ec3d78a626fa6ca7.setContent(html_3e35543ec0abddaa614eb905b22069b8);
+        
+
+        marker_b63fb8782f744af8c1c9813c4d9c9e67.bindPopup(popup_36ad0734336b9809ec3d78a626fa6ca7)
+        .openPopup();
+
+        
+    
+    
+            var marker_c12e22432c0ee3a0820af31eea60416b = L.marker(
+                [-7.3798, 112.7777],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_4c4f807672dcd6b8138b1afec3e44de3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c12e22432c0ee3a0820af31eea60416b.setIcon(icon_4c4f807672dcd6b8138b1afec3e44de3);
+        
+    
+        var popup_c327fafb028935731ae9038d4d3171ff = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_e43356199d6745a00f05faef90f59b35 = $(`<div id="html_e43356199d6745a00f05faef90f59b35" style="width: 100.0%; height: 100.0%;"><b>泗水朱安达机场（SUB）</b></div>`)[0];
+            popup_c327fafb028935731ae9038d4d3171ff.setContent(html_e43356199d6745a00f05faef90f59b35);
+        
+
+        marker_c12e22432c0ee3a0820af31eea60416b.bindPopup(popup_c327fafb028935731ae9038d4d3171ff)
+        .openPopup();
+
+        
+    
+    
+            var marker_ea011b8536346f1ba0ad3b071d8cb6bf = L.marker(
+                [-8.7481, 115.1668],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_de8dca1200385d4e13698ee07dda263d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_ea011b8536346f1ba0ad3b071d8cb6bf.setIcon(icon_de8dca1200385d4e13698ee07dda263d);
+        
+    
+        var popup_352b264363e364522b8501ce6eedcc0e = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_09071ae8e8ddc6a034aedc7eb3b88efc = $(`<div id="html_09071ae8e8ddc6a034aedc7eb3b88efc" style="width: 100.0%; height: 100.0%;"><b>巴厘岛登巴萨机场（DPS）</b></div>`)[0];
+            popup_352b264363e364522b8501ce6eedcc0e.setContent(html_09071ae8e8ddc6a034aedc7eb3b88efc);
+        
+
+        marker_ea011b8536346f1ba0ad3b071d8cb6bf.bindPopup(popup_352b264363e364522b8501ce6eedcc0e)
+        .openPopup();
+
+        
+    
+    
+            var marker_070def6a5dd922d829e36259e16c5844 = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var icon_dec9db773e9a835e1f8b79d9720a4c5b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_070def6a5dd922d829e36259e16c5844.setIcon(icon_dec9db773e9a835e1f8b79d9720a4c5b);
+        
+    
+        var popup_a73978f0f19f4ccb704c3ff22198fed9 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_b672bdefdb305fbe6f5f6543500d49be = $(`<div id="html_b672bdefdb305fbe6f5f6543500d49be" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_a73978f0f19f4ccb704c3ff22198fed9.setContent(html_b672bdefdb305fbe6f5f6543500d49be);
+        
+
+        marker_070def6a5dd922d829e36259e16c5844.bindPopup(popup_a73978f0f19f4ccb704c3ff22198fed9)
+        .openPopup();
+
+        
+    
+    
+            ant_path_de93b33e80c15ff18caa71dba0c1a56a = L.polyline.antPath(
+              [[-7.9274, 112.9692], [-7.9425, 112.953], [-7.9274, 112.9692], [-7.3798, 112.7777], [-8.7481, 115.1668], [-8.658, 115.1264]],
+              {"bubblingMouseEvents": true, "color": "green", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_53ab8dd0e5d349b73fe1e53b30bd5599);
+        
+    
+            var feature_group_439cc9f52971bbae8ba3b18c99261a17 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_2c90b373be2df82ed8e2d60edfcc30c8 = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_439cc9f52971bbae8ba3b18c99261a17);
+        
+    
+            var icon_1db9f981223b780b974276c4757e1ac9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_2c90b373be2df82ed8e2d60edfcc30c8.setIcon(icon_1db9f981223b780b974276c4757e1ac9);
+        
+    
+        var popup_aee69c40d6cac63e56a868633ed5abe3 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_da2122f0d92ae6af4135dde7396e605e = $(`<div id="html_da2122f0d92ae6af4135dde7396e605e" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_aee69c40d6cac63e56a868633ed5abe3.setContent(html_da2122f0d92ae6af4135dde7396e605e);
+        
+
+        marker_2c90b373be2df82ed8e2d60edfcc30c8.bindPopup(popup_aee69c40d6cac63e56a868633ed5abe3)
+        .openPopup();
+
+        
+    
+    
+            var marker_aa607a8d3a3f104072f5af54ac814547 = L.marker(
+                [-8.6932, 115.2664],
+                {}
+            ).addTo(feature_group_439cc9f52971bbae8ba3b18c99261a17);
+        
+    
+            var icon_c674317ab673fed74607d52aab8be4ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_aa607a8d3a3f104072f5af54ac814547.setIcon(icon_c674317ab673fed74607d52aab8be4ff);
+        
+    
+        var popup_e2b281b9f5faee78c5567f44705482dd = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_a58e8153205b4b52a3b4817d15ca22b5 = $(`<div id="html_a58e8153205b4b52a3b4817d15ca22b5" style="width: 100.0%; height: 100.0%;"><b>Day 5 - Sanur码头（前往佩尼达）</b></div>`)[0];
+            popup_e2b281b9f5faee78c5567f44705482dd.setContent(html_a58e8153205b4b52a3b4817d15ca22b5);
+        
+
+        marker_aa607a8d3a3f104072f5af54ac814547.bindPopup(popup_e2b281b9f5faee78c5567f44705482dd)
+        .openPopup();
+
+        
+    
+    
+            var marker_ac58d9f38fa4614c00178f1dafcc2e38 = L.marker(
+                [-8.7498, 115.4786],
+                {}
+            ).addTo(feature_group_439cc9f52971bbae8ba3b18c99261a17);
+        
+    
+            var icon_9bcc18e77b8ffc534d6bbc0a2936647a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_ac58d9f38fa4614c00178f1dafcc2e38.setIcon(icon_9bcc18e77b8ffc534d6bbc0a2936647a);
+        
+    
+        var popup_43a9de4902c7b85ec285cbc78386e59c = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_6c30cebf60023fc9ca2f6152455a5d3e = $(`<div id="html_6c30cebf60023fc9ca2f6152455a5d3e" style="width: 100.0%; height: 100.0%;"><b>Day 5 - 佩尼达岛（精灵坠崖）</b></div>`)[0];
+            popup_43a9de4902c7b85ec285cbc78386e59c.setContent(html_6c30cebf60023fc9ca2f6152455a5d3e);
+        
+
+        marker_ac58d9f38fa4614c00178f1dafcc2e38.bindPopup(popup_43a9de4902c7b85ec285cbc78386e59c)
+        .openPopup();
+
+        
+    
+    
+            var marker_e056845856e196a230a054d488d74e0b = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_439cc9f52971bbae8ba3b18c99261a17);
+        
+    
+            var icon_9b120aba9afdf99be3f8d815ef24872a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_e056845856e196a230a054d488d74e0b.setIcon(icon_9b120aba9afdf99be3f8d815ef24872a);
+        
+    
+        var popup_3f4f70a1ab30062fa5584bf34e0dec2d = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_33c7d9e00f8756129eeaa59d6b78e229 = $(`<div id="html_33c7d9e00f8756129eeaa59d6b78e229" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_3f4f70a1ab30062fa5584bf34e0dec2d.setContent(html_33c7d9e00f8756129eeaa59d6b78e229);
+        
+
+        marker_e056845856e196a230a054d488d74e0b.bindPopup(popup_3f4f70a1ab30062fa5584bf34e0dec2d)
+        .openPopup();
+
+        
+    
+    
+            ant_path_1217bebfb216d8026928433350903ca5 = L.polyline.antPath(
+              [[-8.658, 115.1264], [-8.6932, 115.2664], [-8.7498, 115.4786], [-8.658, 115.1264]],
+              {"bubblingMouseEvents": true, "color": "purple", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_439cc9f52971bbae8ba3b18c99261a17);
+        
+    
+            var feature_group_c5987b36cbfe541202ebec576dbd213d = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_ee89fe1e578ba1f6f566720fb0daf922 = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_c5987b36cbfe541202ebec576dbd213d);
+        
+    
+            var icon_16e9cb3b78ba3f218ca4f52e0ae6a437 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkred", "prefix": "glyphicon"}
+            );
+            marker_ee89fe1e578ba1f6f566720fb0daf922.setIcon(icon_16e9cb3b78ba3f218ca4f52e0ae6a437);
+        
+    
+        var popup_b045342f4d50f04b894cf82443271859 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_2c029a7917eb04e092d028c8cc223dce = $(`<div id="html_2c029a7917eb04e092d028c8cc223dce" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_b045342f4d50f04b894cf82443271859.setContent(html_2c029a7917eb04e092d028c8cc223dce);
+        
+
+        marker_ee89fe1e578ba1f6f566720fb0daf922.bindPopup(popup_b045342f4d50f04b894cf82443271859)
+        .openPopup();
+
+        
+    
+    
+            var marker_0fea9c6d0f146d5d3dd3ce7a1463bf76 = L.marker(
+                [-8.7743, 115.1601],
+                {}
+            ).addTo(feature_group_c5987b36cbfe541202ebec576dbd213d);
+        
+    
+            var icon_88b1286831b93792e1d437a0ed90c5f4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkred", "prefix": "glyphicon"}
+            );
+            marker_0fea9c6d0f146d5d3dd3ce7a1463bf76.setIcon(icon_88b1286831b93792e1d437a0ed90c5f4);
+        
+    
+        var popup_81077561a917c95b9c12aa7b8af48958 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_c7b6fa1efa92a249bfa0c79aae5d27e2 = $(`<div id="html_c7b6fa1efa92a249bfa0c79aae5d27e2" style="width: 100.0%; height: 100.0%;"><b>Day 6 - 金巴兰海滩区域</b></div>`)[0];
+            popup_81077561a917c95b9c12aa7b8af48958.setContent(html_c7b6fa1efa92a249bfa0c79aae5d27e2);
+        
+
+        marker_0fea9c6d0f146d5d3dd3ce7a1463bf76.bindPopup(popup_81077561a917c95b9c12aa7b8af48958)
+        .openPopup();
+
+        
+    
+    
+            var marker_3899913ebc213255d78cc40127797b23 = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_c5987b36cbfe541202ebec576dbd213d);
+        
+    
+            var icon_974068a5936999f4f1209cdf3249e265 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkred", "prefix": "glyphicon"}
+            );
+            marker_3899913ebc213255d78cc40127797b23.setIcon(icon_974068a5936999f4f1209cdf3249e265);
+        
+    
+        var popup_fe25f2286f7fe557a41ca226b1c5170f = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_5d6a6dabea7e0e5b40e39919d6259e0d = $(`<div id="html_5d6a6dabea7e0e5b40e39919d6259e0d" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_fe25f2286f7fe557a41ca226b1c5170f.setContent(html_5d6a6dabea7e0e5b40e39919d6259e0d);
+        
+
+        marker_3899913ebc213255d78cc40127797b23.bindPopup(popup_fe25f2286f7fe557a41ca226b1c5170f)
+        .openPopup();
+
+        
+    
+    
+            ant_path_cc1562d4c099a918b452c4e6223220c5 = L.polyline.antPath(
+              [[-8.658, 115.1264], [-8.7743, 115.1601], [-8.658, 115.1264]],
+              {"bubblingMouseEvents": true, "color": "darkred", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "darkred", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_c5987b36cbfe541202ebec576dbd213d);
+        
+    
+            var feature_group_70eca9da906039e3ea97cdd874e053c7 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_afbd06c1e7a5cfaad88bbbe020bbff9b = L.marker(
+                [-8.658, 115.1264],
+                {}
+            ).addTo(feature_group_70eca9da906039e3ea97cdd874e053c7);
+        
+    
+            var icon_17213949a2ab68bf96c597b08f986424 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkblue", "prefix": "glyphicon"}
+            );
+            marker_afbd06c1e7a5cfaad88bbbe020bbff9b.setIcon(icon_17213949a2ab68bf96c597b08f986424);
+        
+    
+        var popup_ebbb0a3ae271114ea7fc86aa934c65e3 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_7e8bad3f59bf15a49d43221b573e8c01 = $(`<div id="html_7e8bad3f59bf15a49d43221b573e8c01" style="width: 100.0%; height: 100.0%;"><b>Munno Villa</b></div>`)[0];
+            popup_ebbb0a3ae271114ea7fc86aa934c65e3.setContent(html_7e8bad3f59bf15a49d43221b573e8c01);
+        
+
+        marker_afbd06c1e7a5cfaad88bbbe020bbff9b.bindPopup(popup_ebbb0a3ae271114ea7fc86aa934c65e3)
+        .openPopup();
+
+        
+    
+    
+            var marker_376436a01d5ffecab4da1bd5817878f2 = L.marker(
+                [-8.5072, 115.2788],
+                {}
+            ).addTo(feature_group_70eca9da906039e3ea97cdd874e053c7);
+        
+    
+            var icon_62949fd96f75fe0b14a6012239408e69 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkblue", "prefix": "glyphicon"}
+            );
+            marker_376436a01d5ffecab4da1bd5817878f2.setIcon(icon_62949fd96f75fe0b14a6012239408e69);
+        
+    
+        var popup_340fedcf33322225b6f523c75539b0e6 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_8c0ad11818784536188b62e28d9fda5e = $(`<div id="html_8c0ad11818784536188b62e28d9fda5e" style="width: 100.0%; height: 100.0%;"><b>Day 7 - ATV越野体验区（乌布）</b></div>`)[0];
+            popup_340fedcf33322225b6f523c75539b0e6.setContent(html_8c0ad11818784536188b62e28d9fda5e);
+        
+
+        marker_376436a01d5ffecab4da1bd5817878f2.bindPopup(popup_340fedcf33322225b6f523c75539b0e6)
+        .openPopup();
+
+        
+    
+    
+            var marker_fe7c26c6cec7c9d17b6cae8bfa10c480 = L.marker(
+                [-8.4633, 115.2795],
+                {}
+            ).addTo(feature_group_70eca9da906039e3ea97cdd874e053c7);
+        
+    
+            var icon_33a5e6ed0bead7114695ee58952d98ab = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "darkblue", "prefix": "glyphicon"}
+            );
+            marker_fe7c26c6cec7c9d17b6cae8bfa10c480.setIcon(icon_33a5e6ed0bead7114695ee58952d98ab);
+        
+    
+        var popup_deccff817f1018224fc4d3d5e5f9771e = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_8b2b2f2c191e7d3e6b9947e5b25cb1a5 = $(`<div id="html_8b2b2f2c191e7d3e6b9947e5b25cb1a5" style="width: 100.0%; height: 100.0%;"><b>萨克蒂花园度假村</b></div>`)[0];
+            popup_deccff817f1018224fc4d3d5e5f9771e.setContent(html_8b2b2f2c191e7d3e6b9947e5b25cb1a5);
+        
+
+        marker_fe7c26c6cec7c9d17b6cae8bfa10c480.bindPopup(popup_deccff817f1018224fc4d3d5e5f9771e)
+        .openPopup();
+
+        
+    
+    
+            ant_path_31bf5bca701b80c66520adb3435e57b2 = L.polyline.antPath(
+              [[-8.658, 115.1264], [-8.5072, 115.2788], [-8.4633, 115.2795]],
+              {"bubblingMouseEvents": true, "color": "darkblue", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "darkblue", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_70eca9da906039e3ea97cdd874e053c7);
+        
+    
+            var feature_group_776d362302f71d93198335022c4d5109 = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_8c955d4e365de2bc258f2740778167ae = L.marker(
+                [-8.4633, 115.2795],
+                {}
+            ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var icon_4e99cec6e66e0fad91dfedb7153a1dc4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_8c955d4e365de2bc258f2740778167ae.setIcon(icon_4e99cec6e66e0fad91dfedb7153a1dc4);
+        
+    
+        var popup_15725353323afa60e76c1d296d240198 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_a02e86f073470fde39fab245c0a83831 = $(`<div id="html_a02e86f073470fde39fab245c0a83831" style="width: 100.0%; height: 100.0%;"><b>萨克蒂花园度假村</b></div>`)[0];
+            popup_15725353323afa60e76c1d296d240198.setContent(html_a02e86f073470fde39fab245c0a83831);
+        
+
+        marker_8c955d4e365de2bc258f2740778167ae.bindPopup(popup_15725353323afa60e76c1d296d240198)
+        .openPopup();
+
+        
+    
+    
+            var marker_330f627e3c0a669fd9875a02c31ba515 = L.marker(
+                [-8.4329, 115.2799],
+                {}
+            ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var icon_6fe4f39163815cf4ee5826679e3247e0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_330f627e3c0a669fd9875a02c31ba515.setIcon(icon_6fe4f39163815cf4ee5826679e3247e0);
+        
+    
+        var popup_656ce05413c9375a1ee0d043c69490b1 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_51d693dd95813038a12598c80f266eb9 = $(`<div id="html_51d693dd95813038a12598c80f266eb9" style="width: 100.0%; height: 100.0%;"><b>Day 8 - 德格拉朗梯田</b></div>`)[0];
+            popup_656ce05413c9375a1ee0d043c69490b1.setContent(html_51d693dd95813038a12598c80f266eb9);
+        
+
+        marker_330f627e3c0a669fd9875a02c31ba515.bindPopup(popup_656ce05413c9375a1ee0d043c69490b1)
+        .openPopup();
+
+        
+    
+    
+            var marker_36ee83a7b2e4d90afb9cfe370278f90d = L.marker(
+                [-8.4295, 115.2804],
+                {}
+            ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var icon_b490a5d0c8b590aedafd21d833a56c3a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_36ee83a7b2e4d90afb9cfe370278f90d.setIcon(icon_b490a5d0c8b590aedafd21d833a56c3a);
+        
+    
+        var popup_7b7b35a7b500644ce9c667f0754e181b = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_da7fc1522bfbca92ab679213c75d7503 = $(`<div id="html_da7fc1522bfbca92ab679213c75d7503" style="width: 100.0%; height: 100.0%;"><b>Day 8 - 乌布秋千打卡点</b></div>`)[0];
+            popup_7b7b35a7b500644ce9c667f0754e181b.setContent(html_da7fc1522bfbca92ab679213c75d7503);
+        
+
+        marker_36ee83a7b2e4d90afb9cfe370278f90d.bindPopup(popup_7b7b35a7b500644ce9c667f0754e181b)
+        .openPopup();
+
+        
+    
+    
+            var marker_50cd4afcf1e8a63c00664f6fdda9f035 = L.marker(
+                [-8.418, 115.3188],
+                {}
+            ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var icon_7f52f4098830eee70369bb2d32d277d3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_50cd4afcf1e8a63c00664f6fdda9f035.setIcon(icon_7f52f4098830eee70369bb2d32d277d3);
+        
+    
+        var popup_d5ad9fee0ce0248e13af6beb7c19f094 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_250208bc236b60b1e782d09988181ff0 = $(`<div id="html_250208bc236b60b1e782d09988181ff0" style="width: 100.0%; height: 100.0%;"><b>Day 8 - 圣泉寺</b></div>`)[0];
+            popup_d5ad9fee0ce0248e13af6beb7c19f094.setContent(html_250208bc236b60b1e782d09988181ff0);
+        
+
+        marker_50cd4afcf1e8a63c00664f6fdda9f035.bindPopup(popup_d5ad9fee0ce0248e13af6beb7c19f094)
+        .openPopup();
+
+        
+    
+    
+            var marker_19b4355a35b7ae96c20d3e12dabe224e = L.marker(
+                [-8.4149, 115.2439],
+                {}
+            ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var icon_5f3e7d6b99237660313e002210012ec9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_19b4355a35b7ae96c20d3e12dabe224e.setIcon(icon_5f3e7d6b99237660313e002210012ec9);
+        
+    
+        var popup_492eb69c2b2c17b258b4765a33053515 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_988c3b832190455452ec177e7c809f4f = $(`<div id="html_988c3b832190455452ec177e7c809f4f" style="width: 100.0%; height: 100.0%;"><b>普拉玛纳吉里库萨玛酒店</b></div>`)[0];
+            popup_492eb69c2b2c17b258b4765a33053515.setContent(html_988c3b832190455452ec177e7c809f4f);
+        
+
+        marker_19b4355a35b7ae96c20d3e12dabe224e.bindPopup(popup_492eb69c2b2c17b258b4765a33053515)
+        .openPopup();
+
+        
+    
+    
+            ant_path_3dae261aa494ef9d89133bbee4f6a97d = L.polyline.antPath(
+              [[-8.4633, 115.2795], [-8.4329, 115.2799], [-8.4295, 115.2804], [-8.418, 115.3188], [-8.4149, 115.2439]],
+              {"bubblingMouseEvents": true, "color": "cadetblue", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "cadetblue", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_776d362302f71d93198335022c4d5109);
+        
+    
+            var feature_group_fd039b8f71524820c673d261092761af = L.featureGroup(
+                {}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+        
+    
+            var marker_f0c0fb32782cd465e49b1af473ad846b = L.marker(
+                [-8.4149, 115.2439],
+                {}
+            ).addTo(feature_group_fd039b8f71524820c673d261092761af);
+        
+    
+            var icon_8baf3f68a8ab0fa83d541ff53213bfc1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
+            );
+            marker_f0c0fb32782cd465e49b1af473ad846b.setIcon(icon_8baf3f68a8ab0fa83d541ff53213bfc1);
+        
+    
+        var popup_c159d2d0b9bbf4796c60603c2f5b2f56 = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_b1f7e9a90e280fc993602882aab2fe97 = $(`<div id="html_b1f7e9a90e280fc993602882aab2fe97" style="width: 100.0%; height: 100.0%;"><b>普拉玛纳吉里库萨玛酒店</b></div>`)[0];
+            popup_c159d2d0b9bbf4796c60603c2f5b2f56.setContent(html_b1f7e9a90e280fc993602882aab2fe97);
+        
+
+        marker_f0c0fb32782cd465e49b1af473ad846b.bindPopup(popup_c159d2d0b9bbf4796c60603c2f5b2f56)
+        .openPopup();
+
+        
+    
+    
+            var marker_22388f99f23aa45a2bb5f003f591e3a1 = L.marker(
+                [-8.7481, 115.1668],
+                {}
+            ).addTo(feature_group_fd039b8f71524820c673d261092761af);
+        
+    
+            var icon_33204b24052422fe3c0503e3edd4903c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
+            );
+            marker_22388f99f23aa45a2bb5f003f591e3a1.setIcon(icon_33204b24052422fe3c0503e3edd4903c);
+        
+    
+        var popup_0d1b66bcb5c4721d1843ff6215b5260e = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_cf403a78cc9509756cfd27b425cfd720 = $(`<div id="html_cf403a78cc9509756cfd27b425cfd720" style="width: 100.0%; height: 100.0%;"><b>巴厘岛登巴萨机场（DPS）</b></div>`)[0];
+            popup_0d1b66bcb5c4721d1843ff6215b5260e.setContent(html_cf403a78cc9509756cfd27b425cfd720);
+        
+
+        marker_22388f99f23aa45a2bb5f003f591e3a1.bindPopup(popup_0d1b66bcb5c4721d1843ff6215b5260e)
+        .openPopup();
+
+        
+    
+    
+            var marker_ff05de867d22073815373dd41965f1f1 = L.marker(
+                [-33.9399, 151.1753],
+                {}
+            ).addTo(feature_group_fd039b8f71524820c673d261092761af);
+        
+    
+            var icon_be81604576deea228bd0cc4558bf36d5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "black", "prefix": "glyphicon"}
+            );
+            marker_ff05de867d22073815373dd41965f1f1.setIcon(icon_be81604576deea228bd0cc4558bf36d5);
+        
+    
+        var popup_576fcada9b8d59f8e9aaa38127845acb = L.popup({"autoClose": false, "maxWidth": 300});
+
+        
+            var html_45936412a930a2c8d692856659ca28f5 = $(`<div id="html_45936412a930a2c8d692856659ca28f5" style="width: 100.0%; height: 100.0%;"><b>悉尼机场（SYD）</b></div>`)[0];
+            popup_576fcada9b8d59f8e9aaa38127845acb.setContent(html_45936412a930a2c8d692856659ca28f5);
+        
+
+        marker_ff05de867d22073815373dd41965f1f1.bindPopup(popup_576fcada9b8d59f8e9aaa38127845acb)
+        .openPopup();
+
+        
+    
+    
+            ant_path_a7903a63744e9054de89f2656a515a2b = L.polyline.antPath(
+              [[-8.4149, 115.2439], [-8.7481, 115.1668], [-33.9399, 151.1753]],
+              {"bubblingMouseEvents": true, "color": "black", "dashArray": [10, 20], "dashOffset": null, "delay": 400, "fill": false, "fillColor": "black", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_fd039b8f71524820c673d261092761af);
+        
+    
+            var layer_control_05d431f783706e8156da4b69b84e372b = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_65f5c8e782ebce67e77cfd76170daab3,
+                    "\u536b\u661f\u5730\u56fe" : tile_layer_8c208e27add8b3cb8829d2326a7f40cd,
+                },
+                overlays :  {
+                    "Day1 - \u65b0\u52a0\u5761" : feature_group_b152407aec05c1e08979142d8068fe70,
+                    "Day2 - \u6cd7\u6c34" : feature_group_d1e154e42a014f49e5e6fcd5b4ca8fda,
+                    "Day3 - \u6cd7\u6c34" : feature_group_9416fbe133ca8e972a82e3bfb352f244,
+                    "Day4 - \u5df4\u5398\u5c9b" : feature_group_53ab8dd0e5d349b73fe1e53b30bd5599,
+                    "Day5 - \u5df4\u5398\u5c9b" : feature_group_439cc9f52971bbae8ba3b18c99261a17,
+                    "Day6 - \u5df4\u5398\u5c9b" : feature_group_c5987b36cbfe541202ebec576dbd213d,
+                    "Day7 - \u4e4c\u5e03" : feature_group_70eca9da906039e3ea97cdd874e053c7,
+                    "Day8 - \u4e4c\u5e03" : feature_group_776d362302f71d93198335022c4d5109,
+                    "Day9 - \u56de\u7a0b" : feature_group_fd039b8f71524820c673d261092761af,
+                },
+            };
+            L.control.layers(
+                layer_control_05d431f783706e8156da4b69b84e372b.base_layers,
+                layer_control_05d431f783706e8156da4b69b84e372b.overlays,
+                {"autoZIndex": true, "collapsed": false, "position": "topright"}
+            ).addTo(map_54fb0a3bd20bfd65a07ddf9024acc9a1);
+            tile_layer_8c208e27add8b3cb8829d2326a7f40cd.remove();
+            tile_layer_65f5c8e782ebce67e77cfd76170daab3.remove();
+        
+</script>
+</html>
